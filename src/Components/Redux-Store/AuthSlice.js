@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let token = '' ;
 let userLogin = false;
-if(localStorage.Token){
+if(localStorage.token){
     token = localStorage.getItem('token');
     userLogin = true;
 }

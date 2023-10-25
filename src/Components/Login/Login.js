@@ -61,8 +61,9 @@ function Login() {
         body: JSON.stringify(obj),
       });
       const result = await res.json();
-      if (result.success) {
-        dispatch(AuthAction.setUserVerified({ token: result.token }));
+      console.log(result);
+      if (result.login) {
+        dispatch(AuthAction.setLogin({ token: result.token }));
         alert(result.message);
         navigate("/");
       } else {
