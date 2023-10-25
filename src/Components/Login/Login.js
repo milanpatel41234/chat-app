@@ -38,9 +38,7 @@ function Login() {
   });
 
   useEffect(() => {
-    setFormIsValid(
-      emailState.isValid && passwordState.isValid
-    );
+    setFormIsValid(emailState.isValid && passwordState.isValid);
   }, [emailState.isValid, passwordState.isValid]);
 
   const HandleEmail = (e) => {
@@ -52,13 +50,12 @@ function Login() {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
-    let url = `http://13.234.122.35:5000/login`;
     let obj = {
       email: emailState.value,
       password: passwordState.value,
     };
     try {
-      const res = await fetch(url, {
+      const res = await fetch(`http://localhost:5000/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(obj),
@@ -87,22 +84,26 @@ function Login() {
           onChange={HandleEmail}
           value={emailState.value}
         />
-          <Input
-            id="Password"
-            type="password"
-            isValid={passwordState.isValid}
-            onChange={HandlePassword}
-            value={passwordState.value}
-          />
+        <Input
+          id="Password"
+          type="password"
+          isValid={passwordState.isValid}
+          onChange={HandlePassword}
+          value={passwordState.value}
+        />
 
         <div className={style.actions}>
           <Button type="submit" disabled={!formIsValid}>
-           Login
+            Login
           </Button>
         </div>
       </form>
-        <Link className={style.link} to="/signup">Sign Up</Link>
-        <Link className={style.link} to='/forgotpassword'>Forgot Password</Link>
+      <Link className={style.link} to="/signup">
+        Sign Up
+      </Link>
+      <Link className={style.link} to="/forgotpassword">
+        Forgot Password
+      </Link>
     </div>
   );
 }

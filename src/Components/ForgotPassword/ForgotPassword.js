@@ -1,4 +1,4 @@
-import React, {useReducer} from "react";
+import React, { useReducer } from "react";
 import style from "./ForgotPassword.module.css";
 import Button from "../UI-Store/Button/Button";
 import Input from "../UI-Store/Input/Input";
@@ -26,11 +26,11 @@ function ForgotPassword() {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
-    let url = `http://13.234.122.35:5000/login`;
     let obj = {
-      email: emailState.value}
+      email: emailState.value,
+    };
     try {
-      const res = await fetch(url, {
+      const res = await fetch(`http://localhost:5000/forgotpassword`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(obj),
@@ -60,12 +60,16 @@ function ForgotPassword() {
         />
         <div className={style.actions}>
           <Button type="submit" disabled={!emailState.isValid}>
-           Send Link
+            Send Link
           </Button>
         </div>
       </form>
-        <Link className={style.link} to="/signup">Sign Up</Link>
-        <Link className={style.link} to='/login'>Login</Link>
+      <Link className={style.link} to="/signup">
+        Sign Up
+      </Link>
+      <Link className={style.link} to="/login">
+        Login
+      </Link>
     </div>
   );
 }

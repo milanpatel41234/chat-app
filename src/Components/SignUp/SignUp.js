@@ -1,21 +1,21 @@
-import React, { useEffect, useReducer, useState} from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import style from "./SignUp.module.css";
 import Button from "../UI-Store/Button/Button";
 import Input from "../UI-Store/Input/Input";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const emailReduser = (state, action) => {
-    return { value: action.val, isValid: action.val.includes("@") };
+  return { value: action.val, isValid: action.val.includes("@") };
 };
 const mobileReduser = (state, action) => {
-  return { value: action.val, isValid: action.val.length>9 };
-}
+  return { value: action.val, isValid: action.val.length === 10 };
+};
 const passwordReduser = (state, action) => {
-    return { value: action.val, isValid: action.val.trim().length > 7 };
+  return { value: action.val, isValid: action.val.trim().length > 7 };
 };
 
 function SignUp() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [Name, setName] = useState("");
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -23,27 +23,30 @@ function SignUp() {
     value: "",
     isValid: null,
   });
-  const[mobileState, dispatchMobile] = useReducer(mobileReduser,{
+  const [mobileState, dispatchMobile] = useReducer(mobileReduser, {
     value: "",
     isValid: null,
-  })
+  });
   const [passwordState, dispatchPassword] = useReducer(passwordReduser, {
     value: "",
     isValid: null,
   });
 
   useEffect(() => {
-      setFormIsValid(
-        emailState.isValid && passwordState.isValid && mobileState.isValid && Name.trim().length > 1
-      )
-  }, [emailState.isValid, passwordState.isValid, mobileState.isValid ,Name]);
+    setFormIsValid(
+      emailState.isValid &&
+        passwordState.isValid &&
+        mobileState.isValid &&
+        Name.trim().length > 1
+    );
+  }, [emailState.isValid, passwordState.isValid, mobileState.isValid, Name]);
 
   const HandleEmail = (e) => {
     dispatchEmail({ val: e.target.value });
   };
-  const HandleMobile= (e) => {
+  const HandleMobile = (e) => {
     dispatchMobile({ val: e.target.value });
-  }
+  };
   const HandlePassword = (e) => {
     dispatchPassword({ val: e.target.value });
   };
@@ -51,41 +54,41 @@ function SignUp() {
     setName(e.target.value);
   };
 
-  const HandleSubmit = async(e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
-    const newuser={
-        name:Name,
-        email:emailState.value,
-        mobile:mobileState.value,
-        password:passwordState.value
+    const newuser = {
+      name: Name,
+      email: emailState.value,
+      mobile: mobileState.value,
+      password: passwordState.value,
+    };
+    try {
+      const res = await fetch(`http://localhost:5000/user/signup`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(newuser),
+      });
+      const result = await res.json();
+      if (!result.error) {
+        alert("account created successfully");
+        navigate("/login");
+      } else throw new Error(result.message);
+    } catch (error) {
+      alert(error.message);
     }
-   try {
-    const res = await fetch(`http://13.234.122.35:5000/signup`,{
-        method: 'POST',
-        headers: {'content-type':'application/json'},
-        body: JSON.stringify(newuser)
-    });
-  const result = await res.json();
-    if(!result.error){
-        alert('account created successfully');
-        navigate('/login');
-    }else throw new Error(result.message);
-   } catch (error) {
-   alert(error.message);
-   }
   };
 
   return (
     <div className={style.SignUp}>
-        <h3>Create new account</h3>
+      <h3>Create new account</h3>
       <form onSubmit={HandleSubmit}>
-          <Input
-            id="Name"
-            type="text"
-            state={Name}
-            onChange={HandleName}
-            value={Name}
-          />
+        <Input
+          id="Name"
+          type="text"
+          state={Name}
+          onChange={HandleName}
+          value={Name}
+        />
         <Input
           id="Email"
           type="text"
@@ -110,10 +113,10 @@ function SignUp() {
 
         <div className={style.actions}>
           <Button type="submit" disabled={!formIsValid}>
-           Sign Up
+            Sign Up
           </Button>
         </div>
-         <Link to='/login'>Login</Link>
+        <Link to="/login">Login</Link>
       </form>
     </div>
   );
