@@ -3,6 +3,8 @@ import style from "./SignUp.module.css";
 import Button from "../UI-Store/Button/Button";
 import Input from "../UI-Store/Input/Input";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AuthAction } from "../Redux-Store/Index";
 
 const emailReduser = (state, action) => {
   return { value: action.val, isValid: action.val.includes("@") };
@@ -16,6 +18,7 @@ const passwordReduser = (state, action) => {
 
 function SignUp() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [Name, setName] = useState("");
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -71,7 +74,8 @@ function SignUp() {
       const result = await res.json();
       if (!result.error) {
         alert("account created successfully");
-        navigate("/login");
+       dispatch(AuthAction.setLogin({ token: result.token }));
+        navigate("/");
       } else throw new Error(result.message);
     } catch (error) {
       alert(error.message);

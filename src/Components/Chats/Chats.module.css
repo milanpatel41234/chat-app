@@ -43,6 +43,16 @@
   cursor: pointer;
   font-size: 16px;
 }
+.chatlist{
+    padding: 4px;
+}
+.chatlist li{
+    list-style-type: none;
+    text-align: left;
+    background-color: #d3c9c9;
+    margin: 2px;
+    padding: 3px;
+}
 @media (max-width: 768px) {
   .chatContainer {
     width: 100vw;
