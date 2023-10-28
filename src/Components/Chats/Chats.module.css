@@ -45,13 +45,16 @@
 }
 .chatlist{
     padding: 4px;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 80vh;
 }
 .chatlist li{
     list-style-type: none;
     text-align: left;
     background-color: #d3c9c9;
-    margin: 2px;
-    padding: 3px;
+    margin: 4px 0px;
+    padding: 5px;
 }
 @media (max-width: 768px) {
   .chatContainer {
