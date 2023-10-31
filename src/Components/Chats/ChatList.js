@@ -3,15 +3,15 @@ import { useDispatch, useSelector  } from "react-redux";
 import { getMessage } from "../Redux-Store/MessageSlice";
 
 
-function ChatList() {
+function ChatList({groupId}) {
   const Message = useSelector((state) => state.Message);
   const dispatch = useDispatch()
 
 
   useEffect(() => {
-   dispatch(getMessage())
+   dispatch(getMessage({groupId}))
   }, []);
-
+  
   return (
     <>
       {Message.MessageArray.map((item) => {

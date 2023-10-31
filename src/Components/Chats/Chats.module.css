@@ -15,6 +15,19 @@
   margin: auto;
 }
 
+.chatContainer button{
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
+  text-align: center;
+  background-color: rgb(206, 199, 199);
+  margin: 0 3px;
+}
+.chatContainer input{
+  border-radius: 5px;
+  padding: 3px;
+  margin: 0 3px;
+}
 .inputContainer {
   display: flex;
   align-items: center;
@@ -47,7 +60,7 @@
     padding: 4px;
     display: flex;
     flex-direction: column-reverse;
-    height: 80vh;
+    height: 75vh;
 }
 .chatlist li{
     list-style-type: none;
