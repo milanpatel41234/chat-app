@@ -38,8 +38,26 @@
       list-style-type: none;
       text-align: left;
       background-color: #d3c9c9;
+      display: flex;
+      justify-content: space-between;
       margin: 4px 0px;
       padding: 5px;
+  }
+  .grouplist li p{
+    margin: 0;
+  }
+  .grouplist li i{
+    background-color: green;
+    padding: 2px 5px;
+    border-radius: 5px;
+  }
+  .grouplist li button{
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    text-align: center;
+    background-color: rgb(228, 98, 98);
+    cursor: pointer;
   }
   @media (max-width: 768px) {
     .groupContainer {

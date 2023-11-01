@@ -29,8 +29,8 @@ function Home() {
     fetchGroups();
   },[]);
 
-  const OpenChat = (groupId) => {
-    navigate(`/chats/${groupId}`);
+  const OpenChat = (groupId , groupName) => {
+    navigate(`/chats/${groupId}/${groupName}`);
   };
   const CreateGroup = async() =>{
     try {
@@ -66,7 +66,7 @@ function Home() {
       <ul className={style.grouplist}>
         {Groups.map((group) => {
           return (
-            <li key={group.id} onClick={OpenChat.bind(null, group.id)}>
+            <li key={group.id} onClick={OpenChat.bind(null, group.id ,group.name)}>
               {group.name}
             </li>
           );

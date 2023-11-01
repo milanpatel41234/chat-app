@@ -6,6 +6,7 @@ import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import { useSelector } from "react-redux";
 import ChatsPage from "./Pages/ChatsPage";
 import HomePage from "./Pages/HomePage";
+import GroupDetailsPage from "./Pages/GroupDetailsPage";
 
 function App() {
   const Auth = useSelector((state) => state.Auth);
@@ -15,7 +16,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={Auth.LoginState ? <HomePage/> :  <Navigate to="/login" />} />
-        <Route path='/chats/:groupId' element={Auth.LoginState ? <ChatsPage/> :  <Navigate to="/login" />} />
+        <Route path='/chats/:groupId/:groupName' element={Auth.LoginState ? <ChatsPage/> :  <Navigate to="/login" />} />
+        <Route path='/groupdetails/:groupId/:groupName' element={Auth.LoginState ? <GroupDetailsPage/> :  <Navigate to="/login" />} />
         <Route
           path="/signup"
           element={Auth.LoginState ? <Navigate to="/" /> : <SignupPage />}

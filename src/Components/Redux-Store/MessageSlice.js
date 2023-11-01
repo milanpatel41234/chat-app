@@ -31,7 +31,7 @@ export const getMessage = createAsyncThunk(
           }
           chats.push(data[key]);
         }
-        localStorage.setItem(groupName, JSON.stringify(chats));
+        //localStorage.setItem(groupName, JSON.stringify(chats));
         return [...chats].reverse();
       }
     } catch (error) {
